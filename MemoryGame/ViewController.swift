@@ -11,13 +11,22 @@ import UIKit
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func playButtonTapped(_ sender: Any) {
+    }
+    @IBAction func scoresButtonTapped(_ sender: Any) {
+    }
+    @IBAction func authorsButtonTapped(_ sender: Any) {
+    }
+    @IBAction func exitButtonTapped(_ sender: Any) {
     }
 
 

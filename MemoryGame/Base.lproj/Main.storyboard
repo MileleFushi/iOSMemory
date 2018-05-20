@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,31 +16,162 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemoryGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="WLc-C6-JMa">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Afb-4c-OOh">
-                                <rect key="frame" x="156" y="129" width="63" height="34"/>
+                                <rect key="frame" x="110" y="112" width="202" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
+                                <state key="normal" backgroundImage="button">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="GRAJ">
+                                        <fragment content="PLAY">
                                             <attributes>
-                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <font key="NSFont" metaFont="system" size="18"/>
+                                                <color key="NSColor" red="0.78039216995239258" green="0.83921569585800171" blue="0.34509804844856262" alpha="0.93150684931506844" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                                <font key="NSFont" size="36" name="MarkerFelt-Thin"/>
+                                                <font key="NSOriginalFont" size="18" name="Papyrus-Condensed"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="playButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4ka-Dv-JpB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y67-ik-Jbp">
+                                <rect key="frame" x="111" y="389" width="202" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="button">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="EXIT">
+                                            <attributes>
+                                                <color key="NSColor" red="0.95686274766921997" green="0.84705883264541626" blue="0.19607843458652496" alpha="0.91751391267123283" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                                <font key="NSFont" size="36" name="MarkerFelt-Thin"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="exitButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S2i-kC-7RF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xib-bu-bo8">
+                                <rect key="frame" x="110" y="294" width="202" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="button">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="AUTHORS">
+                                            <attributes>
+                                                <color key="NSColor" red="0.89803922176361084" green="0.54901963472366333" blue="0.12941177189350128" alpha="0.91679152397260277" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                                <font key="NSFont" size="36" name="MarkerFelt-Thin"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="authorsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rsb-fc-40v"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZ6-6T-BJY">
+                                <rect key="frame" x="113" y="206" width="202" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="button">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="SCORES">
+                                            <attributes>
+                                                <color key="NSColor" red="0.65098041296005249" green="0.81568628549575806" blue="0.35686275362968445" alpha="0.93078446061643838" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                                <font key="NSFont" size="36" name="MarkerFelt-Thin"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="scoresButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="brs-3e-h7e"/>
+                                </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.83216959239999999" green="0.98548370600000001" blue="0.47333085539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.31764706969261169" green="0.55686277151107788" blue="0.21960784494876862" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                        <constraints>
+                            <constraint firstItem="WLc-C6-JMa" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="931-H0-Xl9"/>
+                            <constraint firstItem="WLc-C6-JMa" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="bys-uP-kb4"/>
+                            <constraint firstItem="WLc-C6-JMa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="oUI-5v-C0Z"/>
+                            <constraint firstItem="WLc-C6-JMa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uXt-cl-HeA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
         </scene>
+        <!--Select Game Parameters View Controller-->
+        <scene sceneID="sCX-sh-PZ1">
+            <objects>
+                <viewController id="ucX-W6-ucL" customClass="SelectGameParametersViewController" customModule="MemoryGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I9t-pf-Y3Z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="TUJ-Q6-dtV"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rxn-vI-4gU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="703" y="35"/>
+        </scene>
+        <!--Scores View Controller-->
+        <scene sceneID="G9H-hb-RvO">
+            <objects>
+                <viewController id="PQX-SF-C2K" customClass="ScoresViewController" customModule="MemoryGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="88d-BS-xrq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="gNU-cf-SEG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oiz-df-FId" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="33" y="691"/>
+        </scene>
+        <!--Authors View Controller-->
+        <scene sceneID="rMC-ez-acN">
+            <objects>
+                <viewController id="fiN-xD-Dh1" customClass="AuthorsViewController" customModule="MemoryGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tZr-IV-OCZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ETm-A0-dBn"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oth-Sm-Ow1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="707" y="687"/>
+        </scene>
+        <!--Play Game View Controller-->
+        <scene sceneID="66q-Ct-95c">
+            <objects>
+                <viewController id="xLe-QF-IYO" customClass="PlayGameViewController" customModule="MemoryGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mOi-VC-m3e">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="abD-xM-xIS"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zje-dU-duM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1378" y="34"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="background" width="948" height="720"/>
+        <image name="button" width="298" height="282"/>
+    </resources>
 </document>

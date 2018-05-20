@@ -14,6 +14,10 @@
 		9B3EF6E9209218AE00227698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E8209218AE00227698 /* Assets.xcassets */; };
 		9B3EF6EC209218AE00227698 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3EF6EA209218AE00227698 /* LaunchScreen.storyboard */; };
 		9B3EF6F7209218AF00227698 /* MemoryGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6F6209218AF00227698 /* MemoryGameTests.swift */; };
+		9B3EF70620B1AC8300227698 /* PlayGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70520B1AC8300227698 /* PlayGameViewController.swift */; };
+		9B3EF70820B1ACB800227698 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70720B1ACB800227698 /* ScoresViewController.swift */; };
+		9B3EF70A20B1ACCD00227698 /* AuthorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70920B1ACCD00227698 /* AuthorsViewController.swift */; };
+		9B3EF70C20B1AD5A00227698 /* SelectGameParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70B20B1AD5A00227698 /* SelectGameParametersViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,10 @@
 		9B3EF6F2209218AF00227698 /* MemoryGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoryGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3EF6F6209218AF00227698 /* MemoryGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameTests.swift; sourceTree = "<group>"; };
 		9B3EF6F8209218AF00227698 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B3EF70520B1AC8300227698 /* PlayGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGameViewController.swift; sourceTree = "<group>"; };
+		9B3EF70720B1ACB800227698 /* ScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
+		9B3EF70920B1ACCD00227698 /* AuthorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsViewController.swift; sourceTree = "<group>"; };
+		9B3EF70B20B1AD5A00227698 /* SelectGameParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGameParametersViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +94,10 @@
 				9B3EF6EA209218AE00227698 /* LaunchScreen.storyboard */,
 				9B3EF6ED209218AE00227698 /* Info.plist */,
 				9B3EF6E5209218AE00227698 /* MemoryGame.xcdatamodeld */,
+				9B3EF70520B1AC8300227698 /* PlayGameViewController.swift */,
+				9B3EF70720B1ACB800227698 /* ScoresViewController.swift */,
+				9B3EF70920B1ACCD00227698 /* AuthorsViewController.swift */,
+				9B3EF70B20B1AD5A00227698 /* SelectGameParametersViewController.swift */,
 			);
 			path = MemoryGame;
 			sourceTree = "<group>";
@@ -202,8 +214,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B3EF70C20B1AD5A00227698 /* SelectGameParametersViewController.swift in Sources */,
 				9B3EF6E1209218AE00227698 /* ViewController.swift in Sources */,
+				9B3EF70A20B1ACCD00227698 /* AuthorsViewController.swift in Sources */,
+				9B3EF70820B1ACB800227698 /* ScoresViewController.swift in Sources */,
 				9B3EF6DF209218AE00227698 /* AppDelegate.swift in Sources */,
+				9B3EF70620B1AC8300227698 /* PlayGameViewController.swift in Sources */,
 				9B3EF6E7209218AE00227698 /* MemoryGame.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
