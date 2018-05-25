@@ -38,7 +38,6 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <action selector="playButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4ka-Dv-JpB"/>
                                     <segue destination="ucX-W6-ucL" kind="show" id="lTv-Dt-g7n"/>
                                 </connections>
                             </button>
@@ -57,7 +56,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <action selector="exitButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S2i-kC-7RF"/>
+                                    <action selector="exitButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DXa-dQ-Cbh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZ6-6T-BJY">
@@ -75,7 +74,6 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <action selector="scoresButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="brs-3e-h7e"/>
                                     <segue destination="PQX-SF-C2K" kind="show" id="cEV-EV-jkd"/>
                                 </connections>
                             </button>
@@ -94,7 +92,6 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <action selector="authorsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rsb-fc-40v"/>
                                     <segue destination="fiN-xD-Dh1" kind="show" id="wZO-vF-pMo"/>
                                 </connections>
                             </button>
@@ -138,6 +135,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
+                                    <action selector="easyButtonTapped:" destination="wcb-KN-b3Z" eventType="touchUpInside" id="zza-Pb-AKw"/>
                                     <action selector="scoresButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zb9-69-6RH"/>
                                     <segue destination="xLe-QF-IYO" kind="show" id="rIQ-Np-XoT"/>
                                 </connections>
@@ -157,6 +155,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
+                                    <action selector="mediumButtonTapped:" destination="wcb-KN-b3Z" eventType="touchUpInside" id="DnW-mm-zCp"/>
                                     <action selector="scoresButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bDF-g1-Km5"/>
                                     <segue destination="xLe-QF-IYO" kind="show" id="k3P-gB-4uQ"/>
                                 </connections>
@@ -202,6 +201,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
+                                    <action selector="hardButtonTapped:" destination="wcb-KN-b3Z" eventType="touchUpInside" id="Dfe-W8-g9j"/>
                                     <action selector="scoresButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OM8-b0-8Tp"/>
                                     <segue destination="xLe-QF-IYO" kind="show" id="axP-fX-Lb1"/>
                                 </connections>
@@ -218,6 +218,7 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rxn-vI-4gU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="wcb-KN-b3Z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="702.89855072463774" y="34.239130434782609"/>
         </scene>
@@ -394,14 +395,33 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VyE-Fr-8Jk">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VyE-Fr-8Jk" customClass="MyCollectionViewCell" customModule="MemoryGame" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6u-yd-m3c">
+                                                    <rect key="frame" x="0.0" y="0.0" width="46" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="A">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.93314057588577271" green="0.85553900314858178" blue="0.3469517269739989" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                <font key="NSFont" size="36" name="AmericanTypewriter"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.45882353186607361" green="0.25490197539329529" blue="0.058823529630899429" alpha="0.95157320205479456" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                        <color key="backgroundColor" red="0.3333333432674408" green="0.19607843458652496" blue="0.039215687662363052" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                        <connections>
+                                            <outlet property="myLabel" destination="i6u-yd-m3c" id="tgR-hy-U5V"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -429,6 +449,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="k3P-gB-4uQ"/>
         <segue reference="lTv-Dt-g7n"/>
-        <segue reference="kf5-kA-V1r"/>
+        <segue reference="H4N-mY-SXp"/>
     </inferredMetricsTieBreakers>
 </document>

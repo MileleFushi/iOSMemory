@@ -18,6 +18,7 @@
 		9B3EF70820B1ACB800227698 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70720B1ACB800227698 /* ScoresViewController.swift */; };
 		9B3EF70A20B1ACCD00227698 /* AuthorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70920B1ACCD00227698 /* AuthorsViewController.swift */; };
 		9B3EF70C20B1AD5A00227698 /* SelectGameParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70B20B1AD5A00227698 /* SelectGameParametersViewController.swift */; };
+		9B3EF70E20B81BCE00227698 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70D20B81BCE00227698 /* MyCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		9B3EF70720B1ACB800227698 /* ScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
 		9B3EF70920B1ACCD00227698 /* AuthorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorsViewController.swift; sourceTree = "<group>"; };
 		9B3EF70B20B1AD5A00227698 /* SelectGameParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGameParametersViewController.swift; sourceTree = "<group>"; };
+		9B3EF70D20B81BCE00227698 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				9B3EF70720B1ACB800227698 /* ScoresViewController.swift */,
 				9B3EF70920B1ACCD00227698 /* AuthorsViewController.swift */,
 				9B3EF70B20B1AD5A00227698 /* SelectGameParametersViewController.swift */,
+				9B3EF70D20B81BCE00227698 /* MyCollectionViewCell.swift */,
 			);
 			path = MemoryGame;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			files = (
 				9B3EF70C20B1AD5A00227698 /* SelectGameParametersViewController.swift in Sources */,
 				9B3EF6E1209218AE00227698 /* ViewController.swift in Sources */,
+				9B3EF70E20B81BCE00227698 /* MyCollectionViewCell.swift in Sources */,
 				9B3EF70A20B1ACCD00227698 /* AuthorsViewController.swift in Sources */,
 				9B3EF70820B1ACB800227698 /* ScoresViewController.swift in Sources */,
 				9B3EF6DF209218AE00227698 /* AppDelegate.swift in Sources */,
