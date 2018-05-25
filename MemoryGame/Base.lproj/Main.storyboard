@@ -135,9 +135,9 @@
                                     </attributedString>
                                 </state>
                                 <connections>
+                                    <action selector="easyButtonTapped:" destination="ucX-W6-ucL" eventType="touchUpInside" id="QnJ-WQ-tO3"/>
                                     <action selector="easyButtonTapped:" destination="wcb-KN-b3Z" eventType="touchUpInside" id="zza-Pb-AKw"/>
-                                    <action selector="scoresButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zb9-69-6RH"/>
-                                    <segue destination="xLe-QF-IYO" kind="show" id="rIQ-Np-XoT"/>
+                                    <segue destination="xLe-QF-IYO" kind="show" identifier="transportObject" id="rIQ-Np-XoT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lii-ri-mke">
@@ -156,8 +156,8 @@
                                 </state>
                                 <connections>
                                     <action selector="mediumButtonTapped:" destination="wcb-KN-b3Z" eventType="touchUpInside" id="DnW-mm-zCp"/>
-                                    <action selector="scoresButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bDF-g1-Km5"/>
-                                    <segue destination="xLe-QF-IYO" kind="show" id="k3P-gB-4uQ"/>
+                                    <action selector="mediumButtonTapped:" destination="ucX-W6-ucL" eventType="touchUpInside" id="gDd-aV-UXt"/>
+                                    <segue destination="xLe-QF-IYO" kind="show" identifier="transportObject" id="k3P-gB-4uQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daH-JG-zlf">
@@ -202,8 +202,8 @@
                                 </state>
                                 <connections>
                                     <action selector="hardButtonTapped:" destination="wcb-KN-b3Z" eventType="touchUpInside" id="Dfe-W8-g9j"/>
-                                    <action selector="scoresButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OM8-b0-8Tp"/>
-                                    <segue destination="xLe-QF-IYO" kind="show" id="axP-fX-Lb1"/>
+                                    <action selector="hardButtonTapped:" destination="ucX-W6-ucL" eventType="touchUpInside" id="oJO-WZ-Qbg"/>
+                                    <segue destination="xLe-QF-IYO" kind="show" identifier="transportObject" id="axP-fX-Lb1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -395,7 +395,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VyE-Fr-8Jk" customClass="MyCollectionViewCell" customModule="MemoryGame" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="VyE-Fr-8Jk" customClass="MyCollectionViewCell" customModule="MemoryGame" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -424,6 +424,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="xLe-QF-IYO" id="dTC-2y-BHi"/>
+                                    <outlet property="delegate" destination="xLe-QF-IYO" id="qgr-tF-7iD"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -447,8 +451,8 @@
         <image name="button" width="298" height="282"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k3P-gB-4uQ"/>
-        <segue reference="lTv-Dt-g7n"/>
+        <segue reference="axP-fX-Lb1"/>
+        <segue reference="2bc-yU-xaL"/>
         <segue reference="H4N-mY-SXp"/>
     </inferredMetricsTieBreakers>
 </document>
