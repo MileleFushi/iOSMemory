@@ -16,9 +16,13 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     
     var myCreatedGame: Match = Match(difficultyLevel: "", alphabetItems: [], randedForGameAlphabetItems: [], maxTimeForGame: 0, playerName: "Player", playerPairsCount: 0)
     
+    var myPairsCount: Int8 = 0
     var myTimeInSeconds: Int16 = 0
     var timeIsRunning = false
     var resumeGame = false
+    var firstChoosedItemId = "null"
+    var secondChoosedItemId = "null"
+    var firstClick = true
     var timer = Timer()
     
     let timeEndedAlert = UIAlertController(title: "Time is over!", message: "Time for your game has ended. Do you wanna try again? :)", preferredStyle: UIAlertControllerStyle.alert)
@@ -32,6 +36,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         
         myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: myCreatedGame.playerPairsCount)
         myLabelMaxTimeForGame.text = setMyLabelMaxTimeForGame(seconds: myCreatedGame.maxTimeForGame)
+        myPairsCount = Int8(myCreatedGame.playerPairsCount)
         myTimeInSeconds = Int16(myCreatedGame.maxTimeForGame)
         
         //ustawienie przyciskow alertu
@@ -122,6 +127,8 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func restartGame(){
         timeIsRunning = false
+        self.myPairsCount = myCreatedGame.playerPairsCount
+        self.myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: self.myPairsCount)
         loadViewIfNeeded()
     }
     
@@ -142,12 +149,26 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     
     //co ma zrobic po nacisnieciu kafelka
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("You selected cell #\(indexPath.item)!")
+        //print("You selected cell #\(indexPath.item)!")
         
         if(timeIsRunning == false){
             runTimer()
             timeIsRunning = true
         }
+        
+        if(firstClick){
+            firstChoosedItemId = myCreatedGame.randedForGameAlphabetItems[indexPath.row]
+            firstClick = false
+        }else{
+            secondChoosedItemId = myCreatedGame.randedForGameAlphabetItems[indexPath.row]
+            
+            if(secondChoosedItemId == firstChoosedItemId){
+                myPairsCount = myPairsCount + 1
+                myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: myPairsCount)
+            }
+            firstClick = true
+        }
+        
         
     }
 
