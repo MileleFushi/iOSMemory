@@ -10,6 +10,7 @@ import UIKit
 
 class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     
+    //ZMIENNE
     @IBOutlet weak var myLabelPlayerPairsCount: UILabel!
     @IBOutlet weak var myLabelMaxTimeForGame: UILabel!
     @IBOutlet weak var backButton: UIButton!
@@ -20,26 +21,28 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     var myTimeInSeconds: Int16 = 0
     var timeIsRunning = false
     var resumeGame = false
-    var firstChoosedItemId = "null"
-    var secondChoosedItemId = "null"
+    var firstChoosedItemContent = "null"
+    var secondChoosedItemContent = "null"
     var firstClick = true
     var timer = Timer()
     
     let timeEndedAlert = UIAlertController(title: "Time is over!", message: "Time for your game has ended. Do you wanna try again? :)", preferredStyle: UIAlertControllerStyle.alert)
     
-    
+    //VIEW-DID-LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
+        //listenery nasluchujace czy aplikacja przeszla do tla/czy wrocila z tla
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         notificationCenter.addObserver(self, selector: #selector(appNotInBackground), name: Notification.Name.UIApplicationWillEnterForeground, object: nil)
         
+        //ustawienie do labelek i zmiennych widoku domyslnych wartosci z protokolu-struktury Game-Match
         myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: myCreatedGame.playerPairsCount)
         myLabelMaxTimeForGame.text = setMyLabelMaxTimeForGame(seconds: myCreatedGame.maxTimeForGame)
         myPairsCount = Int8(myCreatedGame.playerPairsCount)
         myTimeInSeconds = Int16(myCreatedGame.maxTimeForGame)
         
-        //ustawienie przyciskow alertu
+        //ustawienie przyciskow alertu konca czasu
         self.timeEndedAlert.addAction(UIAlertAction(title: "Back", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
             self.backButton.sendActions(for: .touchUpInside)
         }))
@@ -48,6 +51,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         }))
     }
     
+    //VIEV-DID-APPEAR
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if(resumeGame == true){
@@ -55,6 +59,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
+    //funkcje obslugujace wejscie aplikacji do tla
     @objc func appMovedToBackground() {
         pauseStopTimer()
     }
@@ -63,10 +68,12 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         pauseStartTimer()
     }
     
+    //akcja przycisku backButton
     @IBAction func backButtonTapped(_ sender: Any) {
         pauseStopTimer()
     }
     
+    //funkcje do obslugi timera w grze
     func pauseStopTimer(){
         timer.invalidate()
         print("pauseSTOPgame")
@@ -100,11 +107,13 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.decrementTime), userInfo: nil, repeats: true)
     }
     
+    //DID-RECEIVE-MEMORY-WARNING
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    //konwersja sekund na String o wygladzie 00:00 + ustawianie czasu do labelki
     func setMyLabelMaxTimeForGame (seconds : Int16) -> String {
         if ((seconds % 3600) % 60) == 0 {
             return "0\((seconds % 3600) / 60):00"
@@ -117,6 +126,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
+    //konwersja odnalezionych par na String o wygladzie 00 + ustawianie ilosci odgadnietych par do labelki
     func setMyLabelPlayerPairsCount (counts: Int8) -> String {
         if Int(counts) < 10 && Int(counts) >= 0 {
             return "0\(counts)"
@@ -125,6 +135,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
+    //szereg operacji, ktore musza sie wykonac by gracz mogl zagrac jeszcze raz ten sam poziom
     func restartGame(){
         timeIsRunning = false
         self.myPairsCount = myCreatedGame.playerPairsCount
@@ -151,18 +162,19 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //print("You selected cell #\(indexPath.item)!")
         
+        
         if(timeIsRunning == false){
             runTimer()
             timeIsRunning = true
         }
         
         if(firstClick){
-            firstChoosedItemId = myCreatedGame.randedForGameAlphabetItems[indexPath.row]
+            firstChoosedItemContent = myCreatedGame.randedForGameAlphabetItems[indexPath.row]
             firstClick = false
         }else{
-            secondChoosedItemId = myCreatedGame.randedForGameAlphabetItems[indexPath.row]
+            secondChoosedItemContent = myCreatedGame.randedForGameAlphabetItems[indexPath.row]
             
-            if(secondChoosedItemId == firstChoosedItemId){
+            if(secondChoosedItemContent == firstChoosedItemContent){
                 myPairsCount = myPairsCount + 1
                 myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: myPairsCount)
             }
