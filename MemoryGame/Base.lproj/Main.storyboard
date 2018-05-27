@@ -473,6 +473,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="ekO-Md-yuP" id="Mhc-1W-8HA"/>
+                        <outlet property="collectionView" destination="wNr-HD-dED" id="F32-GB-C69"/>
                         <outlet property="myLabelMaxTimeForGame" destination="uph-XW-qfC" id="tSc-w8-z90"/>
                         <outlet property="myLabelPlayerPairsCount" destination="9pC-D9-rXM" id="bU9-6o-Clq"/>
                     </connections>

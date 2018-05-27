@@ -11,18 +11,26 @@ import UIKit
 class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     
     //ZMIENNE
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var myLabelPlayerPairsCount: UILabel!
     @IBOutlet weak var myLabelMaxTimeForGame: UILabel!
     @IBOutlet weak var backButton: UIButton!
     
     var myCreatedGame: Match = Match(difficultyLevel: "", alphabetItems: [], randedForGameAlphabetItems: [], maxTimeForGame: 0, playerName: "Player", playerPairsCount: 0)
     
+    var myMatchItemsArray: [String] = []
     var myPairsCount: Int8 = 0
     var myTimeInSeconds: Int16 = 0
     var timeIsRunning = false
     var resumeGame = false
     var firstChoosedItemContent = "null"
     var secondChoosedItemContent = "null"
+    var firstChoosedItemIndexPath: IndexPath?
+    var secondChoosedItemIndexPath: IndexPath?
+    var firstChoosedItemId = "null"
+    var secondChoosedItemId = "null"
+    var firstCell: MyCollectionViewCell?
+    var secondCell: MyCollectionViewCell?
     var firstClick = true
     var timer = Timer()
     
@@ -41,6 +49,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         myLabelMaxTimeForGame.text = setMyLabelMaxTimeForGame(seconds: myCreatedGame.maxTimeForGame)
         myPairsCount = Int8(myCreatedGame.playerPairsCount)
         myTimeInSeconds = Int16(myCreatedGame.maxTimeForGame)
+        myMatchItemsArray = myCreatedGame.randedForGameAlphabetItems
         
         //ustawienie przyciskow alertu konca czasu
         self.timeEndedAlert.addAction(UIAlertAction(title: "Back", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
@@ -76,13 +85,13 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     //funkcje do obslugi timera w grze
     func pauseStopTimer(){
         timer.invalidate()
-        print("pauseSTOPgame")
+        //print("pauseSTOPgame")
         self.resumeGame = true
         
     }
     
     func pauseStartTimer(){
-        print("pauseSTARTgame")
+        //print("pauseSTARTgame")
         runTimer()
         self.resumeGame = false
         
@@ -92,7 +101,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         
         if(self.myTimeInSeconds != 0){
             let timeInSeconds = self.myTimeInSeconds-1
-            print("\(timeInSeconds)")
+            //print("\(timeInSeconds)")
             self.myLabelMaxTimeForGame.text = self.setMyLabelMaxTimeForGame(seconds: timeInSeconds)
             self.myTimeInSeconds = timeInSeconds
         }else{
@@ -145,7 +154,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     
     //ile kafelek ma zwracac
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return myCreatedGame.randedForGameAlphabetItems.count
+        return myMatchItemsArray.count
     }
     
     //jakie wartosci ma wstawic do labelek kazdego kafelka
@@ -153,15 +162,13 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as! MyCollectionViewCell
         
-        cell.myLabel.text = myCreatedGame.randedForGameAlphabetItems[indexPath.item]
+        cell.myLabel.text = myMatchItemsArray[indexPath.item]
         
         return cell
     }
     
     //co ma zrobic po nacisnieciu kafelka
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //print("You selected cell #\(indexPath.item)!")
-        
         
         if(timeIsRunning == false){
             runTimer()
@@ -169,12 +176,27 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         
         if(firstClick){
-            firstChoosedItemContent = myCreatedGame.randedForGameAlphabetItems[indexPath.row]
+            firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
+            firstChoosedItemContent = myMatchItemsArray[indexPath.row]
+            firstChoosedItemId = "\(indexPath.item)"
+            firstChoosedItemIndexPath = indexPath
             firstClick = false
         }else{
-            secondChoosedItemContent = myCreatedGame.randedForGameAlphabetItems[indexPath.row]
+            secondCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
+            secondChoosedItemContent = myMatchItemsArray[indexPath.row]
+            secondChoosedItemId = "\(indexPath.item)"
+            secondChoosedItemIndexPath = indexPath
             
             if(secondChoosedItemContent == firstChoosedItemContent){
+                myMatchItemsArray[(firstChoosedItemIndexPath?.row)!] = " "
+                myMatchItemsArray[(secondChoosedItemIndexPath?.row)!] = "  "
+                self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.backgroundColor = UIColor(white: 1, alpha: 0.0)
+                self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.backgroundColor = UIColor(white: 1, alpha: 0.0)
+                //myMatchItemsArray.remove(at: Int(firstChoosedItemId)!)
+                //myMatchItemsArray.remove(at: Int(secondChoosedItemId)!)
+                self.collectionView.reloadData()
+                print("Collection refreshed!")
+                
                 myPairsCount = myPairsCount + 1
                 myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: myPairsCount)
             }
