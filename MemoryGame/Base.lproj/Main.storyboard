@@ -28,7 +28,7 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="PLAY">
                                             <attributes>
-                                                <color key="NSColor" red="0.78039216995239258" green="0.83921569585800171" blue="0.34509804844856262" alpha="0.93150684931506844" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                                <color key="NSColor" red="0.80547529731066436" green="0.83096559247389656" blue="0.37028334468899876" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <font key="NSFont" size="36" name="MarkerFelt-Thin"/>
                                                 <font key="NSOriginalFont" size="18" name="Papyrus-Condensed"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -436,7 +436,7 @@
                                                 </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.3333333432674408" green="0.19607843458652496" blue="0.039215687662363052" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                        <color key="backgroundColor" red="0.34650939702987671" green="0.19179466366767883" blue="0.062864966690540314" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="myLabel" destination="i6u-yd-m3c" id="tgR-hy-U5V"/>
                                         </connections>
@@ -490,7 +490,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="axP-fX-Lb1"/>
-        <segue reference="2bc-yU-xaL"/>
+        <segue reference="lTv-Dt-g7n"/>
         <segue reference="H4N-mY-SXp"/>
     </inferredMetricsTieBreakers>
 </document>

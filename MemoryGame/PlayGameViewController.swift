@@ -29,10 +29,15 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     var secondChoosedItemIndexPath: IndexPath?
     var firstChoosedItemId = "null"
     var secondChoosedItemId = "null"
-    var firstCell: MyCollectionViewCell?
-    var secondCell: MyCollectionViewCell?
+    var firstChoosedItem: MyCollectionViewCell?
+    var secondChoosedItem: MyCollectionViewCell?
     var firstClick = true
     var timer = Timer()
+    var colorRed: Float = 65.0
+    var colorGreen: Float = 211.0
+    var colorBlue: Float = 65.0
+    var asciiAndItsColorDictionary: [String: UIColor] = [:]
+    var letterColor: UIColor?
     
     let timeEndedAlert = UIAlertController(title: "Time is over!", message: "Time for your game has ended. Do you wanna try again? :)", preferredStyle: UIAlertControllerStyle.alert)
     
@@ -152,7 +157,45 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         loadViewIfNeeded()
     }
     
-    //ile kafelek ma zwracac
+    //zamiana hex na kolor do odczytu
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    //funkcja do wykonywania animacji trzesienia sie itemu
+    func shakeThatWithAnimation(){
+        
+        let animation = CABasicAnimation(keyPath: "animateItemWrongSelection")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: (firstChoosedItem?.center.x)! - 15, y: (firstChoosedItem?.center.y)!))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: (firstChoosedItem?.center.x)! + 15, y: (firstChoosedItem?.center.y)!))
+        
+        firstChoosedItem?.layer.add(animation, forKey: "animateItemWrongSelection")
+        secondChoosedItem?.layer.add(animation, forKey: "animateItemWrongSelection")
+    }
+    
+    //ile kafelek ma zwracac do sekcji - tutaj jedna sekcja = 0
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return myMatchItemsArray.count
     }
@@ -164,7 +207,37 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         
         cell.myLabel.text = myMatchItemsArray[indexPath.item]
         
+        if(asciiAndItsColorDictionary[cell.myLabel.text!] == nil){
+            changeItemLetterColor(cell: cell)
+            
+        }else{
+            cell.myLabel.textColor = asciiAndItsColorDictionary[cell.myLabel.text!]
+        }
+        
+        cell.contentView.alpha = 0.0
+        
         return cell
+    }
+    
+    //funkcja ustawiajaca kolor czcionki itemu w okreslonej przeze mnie gamie kolorow o 292 poziomach
+    func changeItemLetterColor(cell: MyCollectionViewCell){
+        
+        let jumpInColor = 584.0/Float(myMatchItemsArray.count)
+        
+        if(colorRed < 211){
+            colorRed = colorRed + jumpInColor
+            letterColor = UIColor(red: CGFloat(colorRed/255.0), green: CGFloat(colorGreen/255.0), blue: CGFloat(colorBlue/255.0), alpha: 1.0)
+            cell.myLabel.textColor = letterColor
+            
+            print(colorRed)
+            
+        }else{
+            colorGreen = colorGreen - jumpInColor
+            letterColor = UIColor(red: CGFloat(colorRed/255.0), green: CGFloat(colorGreen/255.0), blue: CGFloat(colorBlue/255.0), alpha: 1.0)
+            cell.myLabel.textColor = letterColor
+        }
+        
+        asciiAndItsColorDictionary[cell.myLabel.text!] = letterColor
     }
     
     //co ma zrobic po nacisnieciu kafelka
@@ -173,34 +246,49 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         if(timeIsRunning == false){
             runTimer()
             timeIsRunning = true
-        }
+        }else{}
         
         if(firstClick){
-            firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
+            firstChoosedItem = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
             firstChoosedItemContent = myMatchItemsArray[indexPath.row]
             firstChoosedItemId = "\(indexPath.item)"
             firstChoosedItemIndexPath = indexPath
             firstClick = false
+            self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "A86417")
+            self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.contentView.alpha = 1.0
+            
         }else{
-            secondCell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
+            secondChoosedItem = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
             secondChoosedItemContent = myMatchItemsArray[indexPath.row]
             secondChoosedItemId = "\(indexPath.item)"
             secondChoosedItemIndexPath = indexPath
+            firstClick = true
+            self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "A86417")
+            self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.contentView.alpha = 1.0
             
-            if(secondChoosedItemContent == firstChoosedItemContent){
-                myMatchItemsArray[(firstChoosedItemIndexPath?.row)!] = " "
-                myMatchItemsArray[(secondChoosedItemIndexPath?.row)!] = "  "
-                self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.backgroundColor = UIColor(white: 1, alpha: 0.0)
-                self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.backgroundColor = UIColor(white: 1, alpha: 0.0)
-                //myMatchItemsArray.remove(at: Int(firstChoosedItemId)!)
-                //myMatchItemsArray.remove(at: Int(secondChoosedItemId)!)
-                self.collectionView.reloadData()
-                print("Collection refreshed!")
+            if(secondChoosedItemContent == firstChoosedItemContent) && (self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.contentView.alpha != 0.01) && (secondChoosedItemId != firstChoosedItemId){
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                    self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.contentView.alpha = 0.01
+                    self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.contentView.alpha = 0.01
+                    
+                    self.collectionView.cellForItem(at: IndexPath(row: self.firstChoosedItemIndexPath!.row, section: self.firstChoosedItemIndexPath!.section))?.backgroundColor = UIColor(white: 1, alpha: 0.0)
+                    self.collectionView.cellForItem(at: IndexPath(row: self.secondChoosedItemIndexPath!.row, section: self.secondChoosedItemIndexPath!.section))?.backgroundColor = UIColor(white: 1, alpha: 0.0)
+                })
                 
                 myPairsCount = myPairsCount + 1
                 myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: myPairsCount)
+                
+            }else{
+                //shakeThatWithAnimation()
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                    self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.backgroundColor = self.hexStringToUIColor(hex: "55320A")
+                    self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.backgroundColor = self.hexStringToUIColor(hex: "55320A")
+                    self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.contentView.alpha = 0.0
+                    self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.contentView.alpha = 0.0
+                })
+                
             }
-            firstClick = true
         }
         
         
