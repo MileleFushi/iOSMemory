@@ -39,7 +39,9 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     var asciiAndItsColorDictionary: [String: UIColor] = [:]
     var letterColor: UIColor?
     
-    let timeEndedAlert = UIAlertController(title: "Time is over!", message: "Time for your game has ended. Do you wanna try again? :)", preferredStyle: UIAlertControllerStyle.alert)
+    let timeEndedAlert = UIAlertController(title: "Time is over!", message: "Time for your game has ended. Try one more time! :)", preferredStyle: UIAlertControllerStyle.alert)
+    
+    let winGameAlert = UIAlertController(title: "Hurra!", message: "You won the match. Check your score! :)", preferredStyle: UIAlertControllerStyle.alert)
     
     //VIEW-DID-LOAD
     override func viewDidLoad() {
@@ -60,8 +62,13 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         self.timeEndedAlert.addAction(UIAlertAction(title: "Back", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
             self.backButton.sendActions(for: .touchUpInside)
         }))
-        self.timeEndedAlert.addAction(UIAlertAction(title: "Yes!", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
-            self.restartGame()
+        
+        //ustawienie przyciskow alertu wygrania gry
+        self.winGameAlert.addAction(UIAlertAction(title: "Back", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
+            self.backButton.sendActions(for: .touchUpInside)
+        }))
+        self.winGameAlert.addAction(UIAlertAction(title: "Show score", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
+            self.showMyScore()
         }))
     }
     
@@ -127,6 +134,10 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         // Dispose of any resources that can be recreated.
     }
     
+    func showMyScore(){
+        self.performSegue(withIdentifier: "showScore", sender: self)
+    }
+    
     //konwersja sekund na String o wygladzie 00:00 + ustawianie czasu do labelki
     func setMyLabelMaxTimeForGame (seconds : Int16) -> String {
         if ((seconds % 3600) % 60) == 0 {
@@ -147,14 +158,6 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         }else{
             return "\(counts)"
         }
-    }
-    
-    //szereg operacji, ktore musza sie wykonac by gracz mogl zagrac jeszcze raz ten sam poziom
-    func restartGame(){
-        timeIsRunning = false
-        self.myPairsCount = myCreatedGame.playerPairsCount
-        self.myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: self.myPairsCount)
-        loadViewIfNeeded()
     }
     
     //zamiana hex na kolor do odczytu
@@ -215,7 +218,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         
         cell.contentView.alpha = 0.0
-        
+        cell.contentView.backgroundColor = hexStringToUIColor(hex: "55320A")
         return cell
     }
     
@@ -243,53 +246,65 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     //co ma zrobic po nacisnieciu kafelka
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let ableToClick = collectionView.cellForItem(at: indexPath)?.backgroundColor != UIColor(white: 1, alpha: 0.0)
+        
         if(timeIsRunning == false){
             runTimer()
             timeIsRunning = true
         }else{}
         
-        if(firstClick){
-            firstChoosedItem = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
-            firstChoosedItemContent = myMatchItemsArray[indexPath.row]
-            firstChoosedItemId = "\(indexPath.item)"
-            firstChoosedItemIndexPath = indexPath
-            firstClick = false
-            self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "A86417")
-            self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.contentView.alpha = 1.0
-            
-        }else{
-            secondChoosedItem = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
-            secondChoosedItemContent = myMatchItemsArray[indexPath.row]
-            secondChoosedItemId = "\(indexPath.item)"
-            secondChoosedItemIndexPath = indexPath
-            firstClick = true
-            self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "A86417")
-            self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.contentView.alpha = 1.0
-            
-            if(secondChoosedItemContent == firstChoosedItemContent) && (self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.contentView.alpha != 0.01) && (secondChoosedItemId != firstChoosedItemId){
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                    self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.contentView.alpha = 0.01
-                    self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.contentView.alpha = 0.01
-                    
-                    self.collectionView.cellForItem(at: IndexPath(row: self.firstChoosedItemIndexPath!.row, section: self.firstChoosedItemIndexPath!.section))?.backgroundColor = UIColor(white: 1, alpha: 0.0)
-                    self.collectionView.cellForItem(at: IndexPath(row: self.secondChoosedItemIndexPath!.row, section: self.secondChoosedItemIndexPath!.section))?.backgroundColor = UIColor(white: 1, alpha: 0.0)
-                })
-                
-                myPairsCount = myPairsCount + 1
-                myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: myPairsCount)
+        if(ableToClick){
+            if(firstClick){
+                firstChoosedItem = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
+                firstChoosedItemContent = myMatchItemsArray[indexPath.row]
+                firstChoosedItemId = "\(indexPath.item)"
+                firstChoosedItemIndexPath = indexPath
+                firstClick = false
+                self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "A86417")
+                self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.contentView.alpha = 1.0
                 
             }else{
-                //shakeThatWithAnimation()
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                    self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.backgroundColor = self.hexStringToUIColor(hex: "55320A")
-                    self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.backgroundColor = self.hexStringToUIColor(hex: "55320A")
-                    self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.contentView.alpha = 0.0
-                    self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.contentView.alpha = 0.0
-                })
+                secondChoosedItem = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as? MyCollectionViewCell
+                secondChoosedItemContent = myMatchItemsArray[indexPath.row]
+                secondChoosedItemId = "\(indexPath.item)"
+                secondChoosedItemIndexPath = indexPath
+                firstClick = true
+                self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "A86417")
+                self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.contentView.alpha = 1.0
                 
+                if(secondChoosedItemContent == firstChoosedItemContent) && (collectionView.cellForItem(at: indexPath)?.backgroundColor != UIColor(white: 1, alpha: 0.0) || collectionView.cellForItem(at: indexPath)?.backgroundColor != UIColor(white: 1, alpha: 0.0)) && (secondChoosedItemId != firstChoosedItemId){
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.contentView.alpha = 0.0
+                        self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.contentView.alpha = 0.0
+                        
+                        self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.backgroundColor = UIColor(white: 1, alpha: 0.0)
+                        self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.backgroundColor = UIColor(white: 1, alpha: 0.0)
+                    })
+                    
+                    myPairsCount = myPairsCount + 1
+                    myLabelPlayerPairsCount.text = setMyLabelPlayerPairsCount(counts: myPairsCount)
+                    if(myPairsCount == myMatchItemsArray.count/2){
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                            self.present(self.winGameAlert, animated: true, completion: nil)
+                            self.self.myTimeInSeconds = 0
+                            self.myLabelMaxTimeForGame.text = self.setMyLabelMaxTimeForGame(seconds: self.myTimeInSeconds)
+                        })
+                    }
+                    
+                }else{
+                    //shakeThatWithAnimation()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.backgroundColor = self.hexStringToUIColor(hex: "55320A")
+                        self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.backgroundColor = self.hexStringToUIColor(hex: "55320A")
+                        self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.contentView.alpha = 0.0
+                        self.collectionView.cellForItem(at: self.secondChoosedItemIndexPath!)?.contentView.alpha = 0.0
+                    })
+                    
+                }
             }
-        }
+        }else{}
+        
         
         
     }
