@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+class PlayGameViewController: UIViewController, UICollectionViewDataSource{
     
     //ZMIENNE
     @IBOutlet weak var collectionView: UICollectionView!
@@ -16,11 +16,13 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var myLabelMaxTimeForGame: UILabel!
     @IBOutlet weak var backButton: UIButton!
     
-    var myCreatedGame: Match = Match(difficultyLevel: "", alphabetItems: [], randedForGameAlphabetItems: [], maxTimeForGame: 0, playerName: "Player", playerPairsCount: 0)
+    var myCreatedGame: Match = Match(difficultyLevel: "", alphabetItems: [], randedForGameAlphabetItems: [], maxTimeForGame: 0, playerName: "Gracz", playerPairsCount: 0)
     
     var myMatchItemsArray: [String] = []
     var myPairsCount: Int8 = 0
     var myTimeInSeconds: Int16 = 0
+    var myPlayerName: String = "Gracz"
+    var myDifficultyLevel: String = "easy"
     var timeIsRunning = false
     var resumeGame = false
     var firstChoosedItemContent = "null"
@@ -57,6 +59,8 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         myPairsCount = Int8(myCreatedGame.playerPairsCount)
         myTimeInSeconds = Int16(myCreatedGame.maxTimeForGame)
         myMatchItemsArray = myCreatedGame.randedForGameAlphabetItems
+        myPlayerName = myCreatedGame.playerName
+        myDifficultyLevel = myCreatedGame.difficultyLevel
         
         //ustawienie przyciskow alertu konca czasu
         self.timeEndedAlert.addAction(UIAlertAction(title: "Back", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
@@ -150,11 +154,24 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         // Dispose of any resources that can be recreated.
     }
     
-    func showMyScore(){
-        self.performSegue(withIdentifier: "showScore", sender: self)
+    //przygotowanie przejscia
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(segue.identifier == "showScore"){
+            
+            let destVC = segue.destination as! ScoresViewController
+            destVC.myPlayerName = myPlayerName
+            destVC.myTimeInSeconds = myTimeInSeconds
+            destVC.myDifficultyLevel = myDifficultyLevel
+        }
     }
     
-    //konwersja sekund na String o wygladzie 00:00 + ustawianie czasu do labelki
+    //argumenty, ktore ma przekazac widok PlayGame do widoku HighScore
+    func showMyScore(){
+        performSegue(withIdentifier: "showScore", sender: nil)
+    }
+    
+    //konwersja sekund na String o wygladzie 00:00
     func setMyLabelMaxTimeForGame (seconds : Int16) -> String {
         if ((seconds % 3600) % 60) == 0 {
             return "0\((seconds % 3600) / 60):00"
@@ -316,8 +333,9 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
                     if(myPairsCount == myMatchItemsArray.count/2){
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                             self.present(self.winGameAlert, animated: true, completion: nil)
-                            self.self.myTimeInSeconds = 0
-                            self.myLabelMaxTimeForGame.text = self.setMyLabelMaxTimeForGame(seconds: self.myTimeInSeconds)
+                            self.pauseStopTimer()
+                            self.myTimeInSeconds = self.myCreatedGame.maxTimeForGame - self.myTimeInSeconds
+                            
                         })
                     }
                     

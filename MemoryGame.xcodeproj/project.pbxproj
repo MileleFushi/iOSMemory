@@ -10,7 +10,7 @@
 		9B3EF6DF209218AE00227698 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6DE209218AE00227698 /* AppDelegate.swift */; };
 		9B3EF6E1209218AE00227698 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E0209218AE00227698 /* ViewController.swift */; };
 		9B3EF6E4209218AE00227698 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E2209218AE00227698 /* Main.storyboard */; };
-		9B3EF6E7209218AE00227698 /* MemoryGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E5209218AE00227698 /* MemoryGame.xcdatamodeld */; };
+		9B3EF6E7209218AE00227698 /* CDMemoryGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E5209218AE00227698 /* CDMemoryGame.xcdatamodeld */; };
 		9B3EF6E9209218AE00227698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E8209218AE00227698 /* Assets.xcassets */; };
 		9B3EF6EC209218AE00227698 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3EF6EA209218AE00227698 /* LaunchScreen.storyboard */; };
 		9B3EF6F7209218AF00227698 /* MemoryGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6F6209218AF00227698 /* MemoryGameTests.swift */; };
@@ -20,6 +20,8 @@
 		9B3EF70C20B1AD5A00227698 /* SelectGameParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70B20B1AD5A00227698 /* SelectGameParametersViewController.swift */; };
 		9B3EF70E20B81BCE00227698 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70D20B81BCE00227698 /* MyCollectionViewCell.swift */; };
 		9B3EF71420B88A8D00227698 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF71320B88A8D00227698 /* Game.swift */; };
+		9BB950C720C0589300668701 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB950C620C0589300668701 /* MyTableViewCell.swift */; };
+		9BB950C920C05FC800668701 /* HighscoresData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB950C820C05FC800668701 /* HighscoresData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		9B3EF70B20B1AD5A00227698 /* SelectGameParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectGameParametersViewController.swift; sourceTree = "<group>"; };
 		9B3EF70D20B81BCE00227698 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B3EF71320B88A8D00227698 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		9BB950C620C0589300668701 /* MyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
+		9BB950C820C05FC800668701 /* HighscoresData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoresData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,19 +95,22 @@
 		9B3EF6DD209218AE00227698 /* MemoryGame */ = {
 			isa = PBXGroup;
 			children = (
+				9BB950C120C04ED600668701 /* CoreDataEntities */,
 				9B3EF6DE209218AE00227698 /* AppDelegate.swift */,
 				9B3EF6E0209218AE00227698 /* ViewController.swift */,
 				9B3EF6E2209218AE00227698 /* Main.storyboard */,
 				9B3EF6E8209218AE00227698 /* Assets.xcassets */,
 				9B3EF6EA209218AE00227698 /* LaunchScreen.storyboard */,
 				9B3EF6ED209218AE00227698 /* Info.plist */,
-				9B3EF6E5209218AE00227698 /* MemoryGame.xcdatamodeld */,
+				9B3EF6E5209218AE00227698 /* CDMemoryGame.xcdatamodeld */,
 				9B3EF70520B1AC8300227698 /* PlayGameViewController.swift */,
 				9B3EF70720B1ACB800227698 /* ScoresViewController.swift */,
 				9B3EF70920B1ACCD00227698 /* AuthorsViewController.swift */,
 				9B3EF70B20B1AD5A00227698 /* SelectGameParametersViewController.swift */,
 				9B3EF70D20B81BCE00227698 /* MyCollectionViewCell.swift */,
 				9B3EF71320B88A8D00227698 /* Game.swift */,
+				9BB950C620C0589300668701 /* MyTableViewCell.swift */,
+				9BB950C820C05FC800668701 /* HighscoresData.swift */,
 			);
 			path = MemoryGame;
 			sourceTree = "<group>";
@@ -115,6 +122,13 @@
 				9B3EF6F8209218AF00227698 /* Info.plist */,
 			);
 			path = MemoryGameTests;
+			sourceTree = "<group>";
+		};
+		9BB950C120C04ED600668701 /* CoreDataEntities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreDataEntities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,12 +237,14 @@
 				9B3EF70C20B1AD5A00227698 /* SelectGameParametersViewController.swift in Sources */,
 				9B3EF71420B88A8D00227698 /* Game.swift in Sources */,
 				9B3EF6E1209218AE00227698 /* ViewController.swift in Sources */,
+				9BB950C720C0589300668701 /* MyTableViewCell.swift in Sources */,
+				9BB950C920C05FC800668701 /* HighscoresData.swift in Sources */,
 				9B3EF70E20B81BCE00227698 /* MyCollectionViewCell.swift in Sources */,
 				9B3EF70A20B1ACCD00227698 /* AuthorsViewController.swift in Sources */,
 				9B3EF70820B1ACB800227698 /* ScoresViewController.swift in Sources */,
 				9B3EF6DF209218AE00227698 /* AppDelegate.swift in Sources */,
 				9B3EF70620B1AC8300227698 /* PlayGameViewController.swift in Sources */,
-				9B3EF6E7209218AE00227698 /* MemoryGame.xcdatamodeld in Sources */,
+				9B3EF6E7209218AE00227698 /* CDMemoryGame.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,13 +486,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9B3EF6E5209218AE00227698 /* MemoryGame.xcdatamodeld */ = {
+		9B3EF6E5209218AE00227698 /* CDMemoryGame.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				9B3EF6E6209218AE00227698 /* MemoryGame.xcdatamodel */,
 			);
 			currentVersion = 9B3EF6E6209218AE00227698 /* MemoryGame.xcdatamodel */;
-			path = MemoryGame.xcdatamodeld;
+			path = CDMemoryGame.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
