@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     //ZMIENNE
     @IBOutlet weak var collectionView: UICollectionView!
@@ -78,6 +78,22 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         if(resumeGame == true){
             pauseStartTimer()
         }
+    }
+    
+    //rozmiary kafelkow w zaleznosci od poziomu trudnosci (ilosci kafelkow)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        
+        if(myCreatedGame.difficultyLevel == "easy"){
+            collectionView.contentSize = CGSize(width: 70.0, height: 75.0)
+            return CGSize(width: 70.0, height: 75.0)
+            
+        }else if(myCreatedGame.difficultyLevel == "medium"){
+            return CGSize(width: 60.0, height: 80.0)
+            
+        }else{
+            return CGSize(width: 60.0, height: 58.0)
+        }
+        
     }
     
     //funkcje obslugujace wejscie aplikacji do tla
@@ -218,11 +234,26 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         
         cell.contentView.alpha = 0.0
-        cell.contentView.backgroundColor = hexStringToUIColor(hex: "55320A")
+        
+        
+        if(myCreatedGame.difficultyLevel == "easy"){
+            cell.myLabel.font = UIFont.init(name: "American Typewriter", size: CGFloat(56))
+            cell.myLabel.frame.origin = CGPoint(x: cell.frame.width / 6, y: cell.frame.height / 6)
+            
+        }else if(myCreatedGame.difficultyLevel == "medium"){
+            cell.myLabel.font = UIFont.init(name: "American Typewriter", size: CGFloat(46))
+            cell.myLabel.frame.origin = CGPoint(x: cell.frame.width / 8, y: cell.frame.height / 6)
+            
+        }else{
+            cell.myLabel.font = UIFont.init(name: "American Typewriter", size: CGFloat(36))
+            cell.myLabel.frame.origin = CGPoint(x: cell.frame.width / 8, y: cell.frame.height / 8)
+        }
+        
+        
         return cell
     }
     
-    //funkcja ustawiajaca kolor czcionki itemu w okreslonej przeze mnie gamie kolorow o 292 poziomach
+    //funkcja ustawiajaca kolor czcionki itemu w okreslonej przeze mnie gamie kolorow o 292 poziomach oraz jej wielkosc zaleznie od poziomu
     func changeItemLetterColor(cell: MyCollectionViewCell){
         
         let jumpInColor = 584.0/Float(myMatchItemsArray.count)
@@ -231,8 +262,6 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
             colorRed = colorRed + jumpInColor
             letterColor = UIColor(red: CGFloat(colorRed/255.0), green: CGFloat(colorGreen/255.0), blue: CGFloat(colorBlue/255.0), alpha: 1.0)
             cell.myLabel.textColor = letterColor
-            
-            print(colorRed)
             
         }else{
             colorGreen = colorGreen - jumpInColor
@@ -246,7 +275,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     //co ma zrobic po nacisnieciu kafelka
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let ableToClick = collectionView.cellForItem(at: indexPath)?.backgroundColor != UIColor(white: 1, alpha: 0.0)
+        let ableToClick = (collectionView.cellForItem(at: indexPath)?.backgroundColor != UIColor(white: 1, alpha: 0.0))
         
         if(timeIsRunning == false){
             runTimer()
@@ -260,7 +289,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
                 firstChoosedItemId = "\(indexPath.item)"
                 firstChoosedItemIndexPath = indexPath
                 firstClick = false
-                self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "A86417")
+                self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "7c4d25")
                 self.collectionView.cellForItem(at: firstChoosedItemIndexPath!)?.contentView.alpha = 1.0
                 
             }else{
@@ -269,10 +298,10 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
                 secondChoosedItemId = "\(indexPath.item)"
                 secondChoosedItemIndexPath = indexPath
                 firstClick = true
-                self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "A86417")
+                self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.backgroundColor = hexStringToUIColor(hex: "7c4d25")
                 self.collectionView.cellForItem(at: secondChoosedItemIndexPath!)?.contentView.alpha = 1.0
                 
-                if(secondChoosedItemContent == firstChoosedItemContent) && (collectionView.cellForItem(at: indexPath)?.backgroundColor != UIColor(white: 1, alpha: 0.0) || collectionView.cellForItem(at: indexPath)?.backgroundColor != UIColor(white: 1, alpha: 0.0)) && (secondChoosedItemId != firstChoosedItemId){
+                if(secondChoosedItemContent == firstChoosedItemContent) && (secondChoosedItemId != firstChoosedItemId){
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         self.collectionView.cellForItem(at: self.firstChoosedItemIndexPath!)?.contentView.alpha = 0.0
