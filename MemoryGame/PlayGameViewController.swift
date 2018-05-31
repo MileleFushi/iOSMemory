@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayGameViewController: UIViewController, UICollectionViewDataSource{
+class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     
     //ZMIENNE
     @IBOutlet weak var collectionView: UICollectionView!

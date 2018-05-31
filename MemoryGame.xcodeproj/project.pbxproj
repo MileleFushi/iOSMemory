@@ -10,7 +10,6 @@
 		9B3EF6DF209218AE00227698 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6DE209218AE00227698 /* AppDelegate.swift */; };
 		9B3EF6E1209218AE00227698 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E0209218AE00227698 /* ViewController.swift */; };
 		9B3EF6E4209218AE00227698 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E2209218AE00227698 /* Main.storyboard */; };
-		9B3EF6E7209218AE00227698 /* CDMemoryGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E5209218AE00227698 /* CDMemoryGame.xcdatamodeld */; };
 		9B3EF6E9209218AE00227698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E8209218AE00227698 /* Assets.xcassets */; };
 		9B3EF6EC209218AE00227698 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B3EF6EA209218AE00227698 /* LaunchScreen.storyboard */; };
 		9B3EF6F7209218AF00227698 /* MemoryGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6F6209218AF00227698 /* MemoryGameTests.swift */; };
@@ -21,7 +20,9 @@
 		9B3EF70E20B81BCE00227698 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF70D20B81BCE00227698 /* MyCollectionViewCell.swift */; };
 		9B3EF71420B88A8D00227698 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF71320B88A8D00227698 /* Game.swift */; };
 		9BB950C720C0589300668701 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB950C620C0589300668701 /* MyTableViewCell.swift */; };
-		9BB950C920C05FC800668701 /* HighscoresData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB950C820C05FC800668701 /* HighscoresData.swift */; };
+		9BB950D020C080BA00668701 /* CDMemoryGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B3EF6E5209218AE00227698 /* CDMemoryGame.xcdatamodeld */; };
+		9BB950D920C09F6A00668701 /* CDMemoryGame+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB950D720C09F6A00668701 /* CDMemoryGame+CoreDataClass.swift */; };
+		9BB950DA20C09F6A00668701 /* CDMemoryGame+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB950D820C09F6A00668701 /* CDMemoryGame+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +54,8 @@
 		9B3EF70D20B81BCE00227698 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B3EF71320B88A8D00227698 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		9BB950C620C0589300668701 /* MyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
-		9BB950C820C05FC800668701 /* HighscoresData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighscoresData.swift; sourceTree = "<group>"; };
+		9BB950D720C09F6A00668701 /* CDMemoryGame+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMemoryGame+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9BB950D820C09F6A00668701 /* CDMemoryGame+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMemoryGame+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +97,7 @@
 		9B3EF6DD209218AE00227698 /* MemoryGame */ = {
 			isa = PBXGroup;
 			children = (
-				9BB950C120C04ED600668701 /* CoreDataEntities */,
+				9BB950D620C09F3C00668701 /* CoreDataEntities */,
 				9B3EF6DE209218AE00227698 /* AppDelegate.swift */,
 				9B3EF6E0209218AE00227698 /* ViewController.swift */,
 				9B3EF6E2209218AE00227698 /* Main.storyboard */,
@@ -110,7 +112,6 @@
 				9B3EF70D20B81BCE00227698 /* MyCollectionViewCell.swift */,
 				9B3EF71320B88A8D00227698 /* Game.swift */,
 				9BB950C620C0589300668701 /* MyTableViewCell.swift */,
-				9BB950C820C05FC800668701 /* HighscoresData.swift */,
 			);
 			path = MemoryGame;
 			sourceTree = "<group>";
@@ -124,9 +125,11 @@
 			path = MemoryGameTests;
 			sourceTree = "<group>";
 		};
-		9BB950C120C04ED600668701 /* CoreDataEntities */ = {
+		9BB950D620C09F3C00668701 /* CoreDataEntities */ = {
 			isa = PBXGroup;
 			children = (
+				9BB950D720C09F6A00668701 /* CDMemoryGame+CoreDataClass.swift */,
+				9BB950D820C09F6A00668701 /* CDMemoryGame+CoreDataProperties.swift */,
 			);
 			path = CoreDataEntities;
 			sourceTree = "<group>";
@@ -235,16 +238,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B3EF70C20B1AD5A00227698 /* SelectGameParametersViewController.swift in Sources */,
+				9BB950DA20C09F6A00668701 /* CDMemoryGame+CoreDataProperties.swift in Sources */,
 				9B3EF71420B88A8D00227698 /* Game.swift in Sources */,
 				9B3EF6E1209218AE00227698 /* ViewController.swift in Sources */,
 				9BB950C720C0589300668701 /* MyTableViewCell.swift in Sources */,
-				9BB950C920C05FC800668701 /* HighscoresData.swift in Sources */,
 				9B3EF70E20B81BCE00227698 /* MyCollectionViewCell.swift in Sources */,
 				9B3EF70A20B1ACCD00227698 /* AuthorsViewController.swift in Sources */,
+				9BB950D920C09F6A00668701 /* CDMemoryGame+CoreDataClass.swift in Sources */,
 				9B3EF70820B1ACB800227698 /* ScoresViewController.swift in Sources */,
 				9B3EF6DF209218AE00227698 /* AppDelegate.swift in Sources */,
 				9B3EF70620B1AC8300227698 /* PlayGameViewController.swift in Sources */,
-				9B3EF6E7209218AE00227698 /* CDMemoryGame.xcdatamodeld in Sources */,
+				9BB950D020C080BA00668701 /* CDMemoryGame.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,7 +407,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = milfushi.MemoryGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -417,7 +421,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = milfushi.MemoryGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

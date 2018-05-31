@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -179,11 +180,12 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="H4N-mY-SXp"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" allowsEditingTextAttributes="YES" borderStyle="roundedRect" placeholder="Type your name..." clearsOnBeginEditing="YES" minimumFontSize="20" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="N2j-mp-8aF">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" allowsEditingTextAttributes="YES" borderStyle="roundedRect" placeholder="Type your name..." minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="N2j-mp-8aF">
                                 <rect key="frame" x="80" y="147.00000000000011" width="253" height="66.666666666666671"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.9686274528503418" green="0.90588235855102539" blue="0.21568627655506134" alpha="0.66465111301369861" colorSpace="custom" customColorSpace="adobeRGB1998"/>
-                                <attributedString key="attributedText"/>
+                                <color key="textColor" red="0.3333333432674408" green="0.19607843458652496" blue="0.031372550874948502" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" textContentType="nickname"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B15-bG-i76">
@@ -223,7 +225,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rxn-vI-4gU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wcb-KN-b3Z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="702.89855072463774" y="34.239130434782609"/>
+            <point key="canvasLocation" x="701" y="38"/>
         </scene>
         <!--Scores View Controller-->
         <scene sceneID="G9H-hb-RvO">
@@ -342,7 +344,7 @@
                                                     <attributedString key="attributedText">
                                                         <fragment content="Name:">
                                                             <attributes>
-                                                                <color key="NSColor" red="0.35686275360000003" green="0.14901961389999999" blue="0.01176470611" alpha="0.92468428940000003" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                                                <color key="NSColor" red="0.35686275362968445" green="0.14901961386203766" blue="0.011764706112444401" alpha="0.92468428938356162" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                                                 <font key="NSFont" size="36" name="MarkerFelt-Thin"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
@@ -408,14 +410,12 @@
                         <viewLayoutGuide key="safeArea" id="gNU-cf-SEG"/>
                     </view>
                     <connections>
-                        <outlet property="playerLabel" destination="Jdz-w1-bHi" id="dgx-Of-1N8"/>
                         <outlet property="tableView" destination="Dfd-0b-8k6" id="DA3-CG-s4N"/>
-                        <outlet property="timeLabel" destination="snB-xw-Gg6" id="qnV-ZK-Nn6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oiz-df-FId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="31.884057971014496" y="689.67391304347836"/>
+            <point key="canvasLocation" x="32" y="704"/>
         </scene>
         <!--Authors View Controller-->
         <scene sceneID="rMC-ez-acN">
@@ -428,9 +428,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundOtherViews" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ3-hg-2nq">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xl6-ei-xty">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xl6-ei-xty">
                                 <rect key="frame" x="80" y="20" width="90" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="button">
                                     <attributedString key="attributedTitle">
                                         <fragment content="BACK">
@@ -447,13 +446,14 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="kf5-kA-V1r"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm8-PG-X6U">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hm8-PG-X6U">
                                 <rect key="frame" x="20" y="138" width="374" height="555"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-Ml-oZd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-Ml-oZd">
                                         <rect key="frame" x="29" y="8" width="330" height="355"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="355" id="LL3-bS-l48"/>
+                                        </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Created by Malgorzata Zawisza for a iOS project with Swift language.">
                                                 <attributes>
@@ -469,13 +469,27 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745289999996" green="0.90588235859999999" blue="0.2156862766" alpha="0.73994006845479454" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                <constraints>
+                                    <constraint firstItem="qFG-Ml-oZd" firstAttribute="leading" secondItem="hm8-PG-X6U" secondAttribute="leading" constant="29" id="Cgu-Ft-nPD"/>
+                                    <constraint firstAttribute="bottom" secondItem="qFG-Ml-oZd" secondAttribute="bottom" constant="192" id="DeR-V2-iQx"/>
+                                    <constraint firstItem="qFG-Ml-oZd" firstAttribute="top" secondItem="hm8-PG-X6U" secondAttribute="topMargin" id="i3I-oz-1Vz"/>
+                                    <constraint firstAttribute="trailing" secondItem="qFG-Ml-oZd" secondAttribute="trailing" constant="15" id="jrU-rI-7Ao"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Xl6-ei-xty" firstAttribute="top" secondItem="ETm-A0-dBn" secondAttribute="top" id="4K7-lh-PyI"/>
+                            <constraint firstItem="hm8-PG-X6U" firstAttribute="top" secondItem="Xl6-ei-xty" secondAttribute="bottom" constant="68" id="BzF-oK-CRP"/>
+                            <constraint firstItem="ETm-A0-dBn" firstAttribute="trailing" secondItem="Xl6-ei-xty" secondAttribute="trailing" constant="244" id="R7K-xF-QYZ"/>
                             <constraint firstItem="ZZ3-hg-2nq" firstAttribute="top" secondItem="tZr-IV-OCZ" secondAttribute="top" id="RNZ-9C-9df"/>
+                            <constraint firstItem="Xl6-ei-xty" firstAttribute="leading" secondItem="ETm-A0-dBn" secondAttribute="leading" constant="80" id="XWs-QM-rVZ"/>
+                            <constraint firstItem="hm8-PG-X6U" firstAttribute="leading" secondItem="tZr-IV-OCZ" secondAttribute="leadingMargin" id="Y7s-8h-UHB"/>
+                            <constraint firstItem="ETm-A0-dBn" firstAttribute="bottom" secondItem="hm8-PG-X6U" secondAttribute="bottom" constant="43" id="d1x-Lc-LL8"/>
                             <constraint firstItem="ZZ3-hg-2nq" firstAttribute="trailing" secondItem="ETm-A0-dBn" secondAttribute="trailing" id="dxn-nD-swq"/>
+                            <constraint firstItem="hm8-PG-X6U" firstAttribute="top" secondItem="tZr-IV-OCZ" secondAttribute="top" constant="138" id="kwf-EW-7Ih"/>
                             <constraint firstItem="ZZ3-hg-2nq" firstAttribute="bottom" secondItem="ETm-A0-dBn" secondAttribute="bottom" id="uwd-pk-hdV"/>
+                            <constraint firstItem="hm8-PG-X6U" firstAttribute="centerX" secondItem="ZZ3-hg-2nq" secondAttribute="centerX" id="w61-Uk-65v"/>
                             <constraint firstItem="ZZ3-hg-2nq" firstAttribute="leading" secondItem="ETm-A0-dBn" secondAttribute="leading" id="zFS-CI-VDT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ETm-A0-dBn"/>
@@ -483,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oth-Sm-Ow1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="703" y="690"/>
+            <point key="canvasLocation" x="700" y="704"/>
         </scene>
         <!--Play Game View Controller-->
         <scene sceneID="66q-Ct-95c">
@@ -609,7 +623,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zje-dU-duM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1376.8115942028987" y="33.423913043478265"/>
+            <point key="canvasLocation" x="1383" y="38"/>
         </scene>
     </scenes>
     <resources>
