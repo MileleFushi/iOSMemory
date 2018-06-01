@@ -295,8 +295,8 @@
                                     <action selector="playButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="auy-eq-234"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dfd-0b-8k6">
-                                <rect key="frame" x="35" y="131" width="343" height="559"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dfd-0b-8k6">
+                                <rect key="frame" x="35" y="162" width="343" height="528"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.96862745289999996" green="0.90588235859999999" blue="0.2156862766" alpha="0.4727365153972603" colorSpace="custom" customColorSpace="adobeRGB1998"/>
                                 <color key="separatorColor" red="0.96862745289999996" green="0.90588235859999999" blue="0.2156862766" alpha="0.64383561639999998" colorSpace="custom" customColorSpace="adobeRGB1998"/>
@@ -399,6 +399,21 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="cH2-y6-6da"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvN-Ov-oAe">
+                                <rect key="frame" x="35" y="112" width="343" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.9529411792755127" green="0.81960785388946533" blue="0.19215686619281769" alpha="0.92414918664383561" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Level easy scores">
+                                        <attributes>
+                                            <color key="NSColor" red="0.3333333432674408" green="0.19607843458652496" blue="0.031372550874948502" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                            <font key="NSFont" size="36" name="MarkerFelt-Thin"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -410,12 +425,13 @@
                         <viewLayoutGuide key="safeArea" id="gNU-cf-SEG"/>
                     </view>
                     <connections>
+                        <outlet property="myHeaderLabel" destination="yvN-Ov-oAe" id="Pcn-rH-6ZL"/>
                         <outlet property="tableView" destination="Dfd-0b-8k6" id="DA3-CG-s4N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oiz-df-FId" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32" y="704"/>
+            <point key="canvasLocation" x="31.884057971014496" y="703.53260869565224"/>
         </scene>
         <!--Authors View Controller-->
         <scene sceneID="rMC-ez-acN">
@@ -446,35 +462,64 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="kf5-kA-V1r"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hm8-PG-X6U">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hm8-PG-X6U">
                                 <rect key="frame" x="20" y="138" width="374" height="555"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="19" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-Ml-oZd">
-                                        <rect key="frame" x="29" y="8" width="330" height="355"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="355" id="LL3-bS-l48"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtC-LQ-leG">
+                                        <rect key="frame" x="26" y="51" width="320" height="480"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Created by Malgorzata Zawisza for a iOS project with Swift language.">
                                                 <attributes>
-                                                    <color key="NSColor" red="0.27843138575553894" green="0.46666666865348816" blue="0.22352941334247589" alpha="1" colorSpace="custom" customColorSpace="adobeRGB1998"/>
+                                                    <color key="NSColor" red="0.22370999999999999" green="0.46266000000000002" blue="0.22531999999999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <font key="NSFont" size="48" name="MarkerFelt-Thin"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                        <tabStops>
+                                                            <textTab alignment="left" location="28">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="56">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="84">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="112">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="140">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="168">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="196">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="224">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="252">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="280">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="308">
+                                                                <options/>
+                                                            </textTab>
+                                                            <textTab alignment="left" location="336">
+                                                                <options/>
+                                                            </textTab>
+                                                        </tabStops>
+                                                    </paragraphStyle>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.45882353190000003" green="0.25490197539999998" blue="0.058823529630000003" alpha="0.51990582190000001" colorSpace="custom" customColorSpace="adobeRGB1998"/>
-                                        <size key="shadowOffset" width="-1" height="-2"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745289999996" green="0.90588235859999999" blue="0.2156862766" alpha="0.73994006845479454" colorSpace="custom" customColorSpace="adobeRGB1998"/>
-                                <constraints>
-                                    <constraint firstItem="qFG-Ml-oZd" firstAttribute="leading" secondItem="hm8-PG-X6U" secondAttribute="leading" constant="29" id="Cgu-Ft-nPD"/>
-                                    <constraint firstAttribute="bottom" secondItem="qFG-Ml-oZd" secondAttribute="bottom" constant="192" id="DeR-V2-iQx"/>
-                                    <constraint firstItem="qFG-Ml-oZd" firstAttribute="top" secondItem="hm8-PG-X6U" secondAttribute="topMargin" id="i3I-oz-1Vz"/>
-                                    <constraint firstAttribute="trailing" secondItem="qFG-Ml-oZd" secondAttribute="trailing" constant="15" id="jrU-rI-7Ao"/>
-                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -497,7 +542,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oth-Sm-Ow1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700" y="704"/>
+            <point key="canvasLocation" x="698.55072463768124" y="703.53260869565224"/>
         </scene>
         <!--Play Game View Controller-->
         <scene sceneID="66q-Ct-95c">

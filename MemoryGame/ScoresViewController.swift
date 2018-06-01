@@ -13,6 +13,7 @@ import CoreData
 class ScoresViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var myHighscores: [CDMemoryGame]?
+    var myViewedHighscores: [CDMemoryGame]?
     var levelCounts: [String: Int] = [:]
     
     var appDelegate: AppDelegate?
@@ -23,38 +24,69 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
     var myTimeInSeconds: Int16 = 0
     var myDifficultyLevel: String = "easy"
     
+    var wonTheGame = false
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var myHeaderLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Highscore - Easy mode"
-        self.tableView.register(MyTableViewCell.self, forCellReuseIdentifier: "TableCell")
         
-        prepareCoreData()
-        addNewHighscore()
+        tableView.dataSource = self
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        prepareCoreData(forDifficultyLevel: myDifficultyLevel)
+        //deleteAllData(entity: "CDMemoryGame")
+        if(wonTheGame){
+            addNewHighscore()
+        }else{}
+        
     }
 
     @IBAction func easyButtonScores(_ sender: Any) {
+        prepareCoreData(forDifficultyLevel: "easy")
+        myHighscores = createSortedDataArrayForLevelDifficulty(array: myHighscores!, diffLevel: "easy")
+        tableView.reloadData()
+        print("EASY")
     }
     
     @IBAction func mediumButtonScores(_ sender: Any) {
+        prepareCoreData(forDifficultyLevel: "medium")
+        myHighscores = createSortedDataArrayForLevelDifficulty(array: myHighscores!, diffLevel: "medium")
+        tableView.reloadData()
+        print("MEDIUM")
     }
     
     @IBAction func hardButtonScores(_ sender: Any) {
+        prepareCoreData(forDifficultyLevel: "hard")
+        myHighscores = createSortedDataArrayForLevelDifficulty(array: myHighscores!, diffLevel: "hard")
+        tableView.reloadData()
+        print("HARD")
     }
     
     //przygotowanie coreData
-    func prepareCoreData(){
+    func prepareCoreData(forDifficultyLevel: String){
         
+        myHeaderLabel.text = "Level \(forDifficultyLevel) scores"
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         context = appDelegate?.persistentContainer.viewContext
         entity = NSEntityDescription.entity(forEntityName: "CDMemoryGame", in: context!)
         
         do{
             myHighscores = try context?.fetch(CDMemoryGame.fetchRequest())
+            myHighscores = createSortedDataArrayForLevelDifficulty(array: myHighscores!, diffLevel: forDifficultyLevel)
         }catch{
             myHighscores = []
         }
+    }
+    
+    //wyczysc rekordy encji glownej
+    func deleteAllData(entity: String)
+    {
+        let ReqVar = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        let DelAllReqVar = NSBatchDeleteRequest(fetchRequest: ReqVar)
+        do { try context?.execute(DelAllReqVar) }
+        catch { print(error) }
     }
     
     //dodawanie celki do listy highscore
@@ -64,7 +96,7 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
         let newHighscore = NSManagedObject(entity: entity!, insertInto: context)
         newHighscore.setValue(myDifficultyLevel, forKey: "difficultyLevel")
         newHighscore.setValue(myPlayerName, forKey: "nick")
-        newHighscore.setValue(setTimeLabelFormat(seconds: myTimeInSeconds), forKey: "time")
+        newHighscore.setValue(myTimeInSeconds, forKey: "time")
         
         //dodawanie nowego highscore do lokalnej tablicy
         myHighscores?.append(newHighscore as! CDMemoryGame)
@@ -85,7 +117,7 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
             for data in result as! [NSManagedObject] {
                 print(data.value(forKey: "nick") as! String)
                 print(data.value(forKey: "difficultyLevel") as! String)
-                print(data.value(forKey: "time") as! String)
+                print(data.value(forKey: "time") as! Int16)
             }
             
         } catch {
@@ -94,7 +126,6 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         //przeladuj tableView
-        print(myHighscores)
         tableView.reloadData()
         
     }
@@ -112,7 +143,12 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    //sprawdz ile jest itemow o okreslonych poziomach trudnosci
     func checkHowManyItemsInLevel(level: String) -> Int {
+        
+        levelCounts["easy"] = 0
+        levelCounts["medium"] = 0
+        levelCounts["hard"] = 0
         
         for item in myHighscores! {
             levelCounts[item.difficultyLevel!] = (levelCounts[item.difficultyLevel!] ?? 0) + 1
@@ -129,6 +165,24 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
             
         }
         
+    }
+    
+    //posortuj tablice coreData czasem malejaco biorac pod uwage pozom
+    func createSortedDataArrayForLevelDifficulty(array: [CDMemoryGame], diffLevel: String) -> [CDMemoryGame]{
+        let myArray = array
+        var newArray: [CDMemoryGame] = []
+        
+        for item in myArray {
+            
+            if(item.difficultyLevel == diffLevel){
+                newArray.append(item)
+            }
+        }
+        
+        newArray = newArray.sorted(by: { $0.time < $1.time })
+        print(newArray)
+        
+        return newArray
     }
     
     //ile celek do jakiej sekcji - u mnie wszystkie do sekcji 0
@@ -149,12 +203,11 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
     //wypelnianie celek
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath as IndexPath) as! MyTableViewCell
-        
-        
+        let cell: MyTableViewCell = self.tableView.dequeueReusableCell(withIdentifier: "TableCell") as! MyTableViewCell
         
         let tempHighscore = myHighscores![indexPath.row]
-        cell.myTimeLabel.text = tempHighscore.getTime()
+        let timeString = setTimeLabelFormat(seconds: tempHighscore.getTime())
+        cell.myTimeLabel.text = timeString
         cell.myPlayerLabel.text = tempHighscore.getNick()
         
         return cell

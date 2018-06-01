@@ -2,7 +2,7 @@
 //  CDMemoryGame+CoreDataClass.swift
 //  MemoryGame
 //
-//  Created by Malgorzata Zawisza on 5/31/18.
+//  Created by Malgorzata Zawisza on 6/1/18.
 //  Copyright © 2018 Malgorzata Zawisza. All rights reserved.
 //
 //
@@ -21,7 +21,7 @@ public class CDMemoryGame: NSManagedObject {
         return nick!
     }
     
-    public func getTime() -> String {
-        return time!
+    public func getTime() -> Int16 {
+        return time
     }
 }

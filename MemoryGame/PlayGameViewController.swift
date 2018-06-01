@@ -34,6 +34,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
     var firstChoosedItem: MyCollectionViewCell?
     var secondChoosedItem: MyCollectionViewCell?
     var firstClick = true
+    var addNewHighscore = true
     var timer = Timer()
     var colorRed: Float = 65.0
     var colorGreen: Float = 211.0
@@ -163,6 +164,7 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
             destVC.myPlayerName = myPlayerName
             destVC.myTimeInSeconds = myTimeInSeconds
             destVC.myDifficultyLevel = myDifficultyLevel
+            destVC.wonTheGame = addNewHighscore
         }
     }
     

@@ -3,7 +3,7 @@
     <entity name="CDMemoryGame" representedClassName="CDMemoryGame" syncable="YES">
         <attribute name="difficultyLevel" optional="YES" attributeType="String" defaultValueString="easy" syncable="YES"/>
         <attribute name="nick" optional="YES" attributeType="String" minValueString="2" maxValueString="6" defaultValueString="Gracz" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
         <element name="CDMemoryGame" positionX="-6444" positionY="-2313" width="128" height="88"/>
