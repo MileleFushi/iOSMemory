@@ -353,9 +353,10 @@ class PlayGameViewController: UIViewController, UICollectionViewDataSource, UICo
                 }
             }
         }else{}
-        
-        
-        
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 
 

@@ -36,7 +36,7 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         prepareCoreData(forDifficultyLevel: myDifficultyLevel)
-        //deleteAllData(entity: "CDMemoryGame")
+        //deleteAllData(entity: "CDMemoryGame") <- BE CAREFUL!
         if(wonTheGame){
             addNewHighscore()
         }else{}
@@ -44,23 +44,26 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     @IBAction func easyButtonScores(_ sender: Any) {
+        myDifficultyLevel = "easy"
         prepareCoreData(forDifficultyLevel: "easy")
         myHighscores = createSortedDataArrayForLevelDifficulty(array: myHighscores!, diffLevel: "easy")
-        tableView.reloadData()
+        self.tableView.reloadData()
         print("EASY")
     }
     
     @IBAction func mediumButtonScores(_ sender: Any) {
+        myDifficultyLevel = "medium"
         prepareCoreData(forDifficultyLevel: "medium")
         myHighscores = createSortedDataArrayForLevelDifficulty(array: myHighscores!, diffLevel: "medium")
-        tableView.reloadData()
+        self.tableView.reloadData()
         print("MEDIUM")
     }
     
     @IBAction func hardButtonScores(_ sender: Any) {
+        myDifficultyLevel = "hard"
         prepareCoreData(forDifficultyLevel: "hard")
         myHighscores = createSortedDataArrayForLevelDifficulty(array: myHighscores!, diffLevel: "hard")
-        tableView.reloadData()
+        self.tableView.reloadData()
         print("HARD")
     }
     
@@ -75,6 +78,7 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
         do{
             myHighscores = try context?.fetch(CDMemoryGame.fetchRequest())
             myHighscores = createSortedDataArrayForLevelDifficulty(array: myHighscores!, diffLevel: forDifficultyLevel)
+            //myViewedHighscores = myHighscores
         }catch{
             myHighscores = []
         }
@@ -126,6 +130,7 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         //przeladuj tableView
+        prepareCoreData(forDifficultyLevel: myDifficultyLevel)
         tableView.reloadData()
         
     }
@@ -159,6 +164,7 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
             
         }else if (level == "medium"){
             return levelCounts["medium"]!
+            
             
         }else{
             return levelCounts["hard"]!
@@ -223,5 +229,8 @@ class ScoresViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
 }
